@@ -1,10 +1,10 @@
 import { 
-    DEMO_EVENT,
+    ADD_TASK,
 } from './types';
 
-export const demoAction = (payload) => dispatch => {
+export const addTask = (payload) => dispatch => {
     dispatch({
-        type: DEMO_EVENT,
+        type: ADD_TASK,
         payload
     });
 }

@@ -1,16 +1,17 @@
 import { 
-    DEMO_EVENT,
+    ADD_TASK,
 } from '../actions/types';
 
 const initialState = {
-    tasks: ['one', 'two', 'three']
+    tasks: []
 };
 
 const taskReducer = (state = initialState, action) => {
     switch(action.type) {
-        case DEMO_EVENT:
+        case ADD_TASK:
             return {
                 ...state,
+                tasks: [...state.tasks, action.payload],
             };
         default:
             return state;

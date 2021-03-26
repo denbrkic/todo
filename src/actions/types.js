@@ -1,1 +1,1 @@
-export const DEMO_EVENT = 'DEMO_EVENT';
+export const ADD_TASK = 'ADD_TASK';

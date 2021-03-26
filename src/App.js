@@ -1,5 +1,6 @@
 import {Route, Link} from 'react-router-dom';
 import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home/Home';
 import TaskDetails from './pages/TaskDetails/TaskDetails';
 import { Provider } from 'react-redux';
