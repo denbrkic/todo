@@ -8,62 +8,83 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+import TheForm from '../../components/TheForm/TheForm';
+
 const TheTable = (props) => {
-    const [showModal, setShowModal] = useState(false);
-    const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const handleDeleteClose = () => setShowDeleteModal(false);
+    const handleDeleteShow = () => setShowDeleteModal(true);
+
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const handleUpdateClose = () => setShowUpdateModal(false);
+    const handleUpdateShow = () => setShowUpdateModal(true);
+
+    const [taskIndex, setTaskIndex] = useState();
     const [taskId, setTaskId] = useState();
 
     const deleteTask = () => {
-        props.deleteTask(taskId)
-        handleClose();
+        props.deleteTask(taskIndex)
+        handleDeleteClose();
     }
 
-    const showDeleteTaskModal = (id) => {
+    const showDeleteTaskModal = (index) => {
+        setTaskIndex(index);
+        handleDeleteShow();
+    }
+
+    const showUpdateTaskModal = (id) => {
         setTaskId(id);
-        handleShow();
+        handleUpdateShow();
     }
 
     return (
         <>
-        <Table responsive>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Creation Date</th>
-                    <th>Details</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {props.tasks.map((task, id) => {
-                    return (
-                        <tr key={id}>
-                            <td>{task.taskId}</td>
-                            <td>{task.taskTitle}</td>
-                            <td>{task.taskDateTime.toLocaleString()}</td>
-                            <td></td>
-                            <td></td>
-                            <td><Button variant="primary" onClick={() => showDeleteTaskModal(id)}>Delete</Button></td>
-                        </tr>
-                    )})}
-            </tbody>
-        </Table>
-        <Modal show={showModal} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Delete Confirmation</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Do you really want to delete the task?</Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Cancel
-                </Button>
-                <Button variant="primary" onClick={deleteTask}>
-                    Delete
-                </Button>
-            </Modal.Footer>
+            <Table responsive>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Creation Date</th>
+                        <th>Details</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.tasks.map((task, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{task.taskId}</td>
+                                <td>{task.taskTitle}</td>
+                                <td>{task.taskDateTime.toLocaleString()}</td>
+                                <td></td>
+                                <td><Button variant="primary" onClick={() => showUpdateTaskModal(task.taskId)}>Update</Button></td>
+                                <td><Button variant="primary" onClick={() => showDeleteTaskModal(index)}>Delete</Button></td>
+                            </tr>
+                        )})}
+                </tbody>
+            </Table>
+            <Modal show={showDeleteModal} onHide={handleDeleteClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete the task</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Do you really want to delete the task?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleDeleteClose}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={deleteTask}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showUpdateModal} onHide={handleUpdateClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Update the task</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <TheForm closeModalCallback={handleUpdateClose} taskId={taskId} />
+                </Modal.Body>
             </Modal>
         </>
     )

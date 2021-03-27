@@ -1,6 +1,7 @@
 import { 
     ADD_TASK,
     DELETE_TASK,
+    UPDATE_TASK,
 } from '../actions/types';
 
 const initialState = {
@@ -9,6 +10,8 @@ const initialState = {
 };
 
 const taskReducer = (state = initialState, action) => {
+    const tasks = [...state.tasks];
+
     switch(action.type) {
         case ADD_TASK:
             return {
@@ -17,11 +20,18 @@ const taskReducer = (state = initialState, action) => {
                 id: ++state.id
             };
         case DELETE_TASK:
-            const tasks = [...state.tasks];
             tasks.splice(action.payload,1);
             return {
                 ...state,
-                tasks: tasks
+                tasks
+            };
+        case UPDATE_TASK:
+            const taskIndex = tasks.findIndex(task => task.taskId === action.payload.taskId);
+            tasks[taskIndex].taskTitle = action.payload.taskTitle;
+            tasks[taskIndex].taskDescription = action.payload.taskDescription;
+            return {
+                ...state,
+                tasks
             };
         default:
             return state;
