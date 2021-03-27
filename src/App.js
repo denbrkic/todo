@@ -1,4 +1,4 @@
-import {Route, Link} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home/Home';
@@ -10,16 +10,8 @@ const App = () => {
   return (
     <Provider store={ store }>
       <div className="App">
-        <header>
-          <nav>
-            <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/details">Details</Link></li>
-            </ul>
-          </nav>
-        </header>
         <Route path="/" exact component={Home} />
-        <Route path="/details" exact component={TaskDetails} />
+        <Route path="/task/:id" exact component={TaskDetails} />
       </div>
     </Provider>
   );

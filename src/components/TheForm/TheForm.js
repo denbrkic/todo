@@ -4,7 +4,6 @@ import {
     updateTask,
 } from '../../actions/task';
 import { connect } from 'react-redux';
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -26,34 +25,40 @@ const TheForm = (props) => {
 
         if (props.closeModalCallback) {
             props.closeModalCallback();
-        }      
+        }
+
+        if (props.submitCallback) {
+            props.submitCallback();
+        }
     }
 
     useEffect(() => {
-        console.log(props.taskId);
-        if (props.taskId) {
+        if (props.taskId && props.tasks) {
             const task = props.tasks.find((task) => task.taskId === props.taskId);
+            console.log(props.taskId, props.tasks, task);
             setTaskTitle(task.taskTitle);
             setTaskDescription(task.taskDescription);
         }
     }, [props.taskId, props.tasks]);
 
     return (
-        <Form onSubmit={processTask}>
-            <Form.Group controlId="taskTitle">
-                <Form.Label>Task Title*</Form.Label>
-                <Form.Control as="input" onChange={e => setTaskTitle(e.target.value)} value={taskTitle} />
-            </Form.Group>
+        <>
+            <Form onSubmit={processTask}>
+                <Form.Group controlId="taskTitle">
+                    <Form.Label>Task Title*</Form.Label>
+                    <Form.Control as="input" onChange={e => setTaskTitle(e.target.value)} value={taskTitle} />
+                </Form.Group>
 
-            <Form.Group controlId="taskDescription">
-                <Form.Label>Task Description*</Form.Label>
-                <Form.Control as="textarea" onChange={e => setTaskDescription(e.target.value)} value={taskDescription}/>
-            </Form.Group>
+                <Form.Group controlId="taskDescription">
+                    <Form.Label>Task Description*</Form.Label>
+                    <Form.Control as="textarea" onChange={e => setTaskDescription(e.target.value)} value={taskDescription}/>
+                </Form.Group>
 
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+        </>
     )
 }
 

@@ -8,6 +8,8 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+import {Link} from 'react-router-dom';
+
 import TheForm from '../../components/TheForm/TheForm';
 
 const TheTable = (props) => {
@@ -45,7 +47,6 @@ const TheTable = (props) => {
                         <th>ID</th>
                         <th>Title</th>
                         <th>Creation Date</th>
-                        <th>Details</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -55,10 +56,9 @@ const TheTable = (props) => {
                         return (
                             <tr key={index}>
                                 <td>{task.taskId}</td>
-                                <td>{task.taskTitle}</td>
+                                <td><Link to={`/task/${task.taskId}`}>{task.taskTitle}</Link></td>
                                 <td>{task.taskDateTime.toLocaleString()}</td>
-                                <td></td>
-                                <td><Button variant="primary" onClick={() => showUpdateTaskModal(task.taskId)}>Update</Button></td>
+                                <td><Button variant="primary" onClick={() => showUpdateTaskModal(task.taskId)}>Edit</Button></td>
                                 <td><Button variant="primary" onClick={() => showDeleteTaskModal(index)}>Delete</Button></td>
                             </tr>
                         )})}
@@ -80,7 +80,7 @@ const TheTable = (props) => {
             </Modal>
             <Modal show={showUpdateModal} onHide={handleUpdateClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Update the task</Modal.Title>
+                    <Modal.Title>Edit the task</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <TheForm closeModalCallback={handleUpdateClose} taskId={taskId} />
