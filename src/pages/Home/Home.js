@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 import TheForm from '../../components/TheForm/TheForm';
+import TheTable from '../../components/TheTable/TheTable';
 
 const Home = () => {
     const [showModal, setShowModal] = useState(false);
@@ -20,7 +21,7 @@ const Home = () => {
                     <Col lg={4}>
                         <h1>ToDo</h1>
                         <Button variant="primary" onClick={handleShow}>
-                            Create a task
+                            Add task
                         </Button>
 
                         <Modal show={showModal} onHide={handleClose}>
@@ -31,6 +32,11 @@ const Home = () => {
                                 <TheForm closeModalCallback={handleClose} />
                             </Modal.Body>
                         </Modal>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={8}>
+                        <TheTable />
                     </Col>
                 </Row>
             </Container>

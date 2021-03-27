@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
     addTask,
 } from '../../actions/task';
@@ -10,10 +10,6 @@ import Button from 'react-bootstrap/Button';
 const TheForm = (props) => {
     const [taskTitle, setTaskTitle] = useState();
     const [taskDescription, setTaskDescription] = useState();
-
-    useEffect(() => {
-        console.log(props.tasks);
-    }, [props.tasks]);
 
     const processTask = (e) => {
         e.preventDefault();
