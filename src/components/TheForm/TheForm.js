@@ -26,16 +26,11 @@ const TheForm = (props) => {
         if (props.closeModalCallback) {
             props.closeModalCallback();
         }
-
-        if (props.submitCallback) {
-            props.submitCallback();
-        }
     }
 
     useEffect(() => {
         if (props.taskId && props.tasks) {
             const task = props.tasks.find((task) => task.taskId === props.taskId);
-            console.log(props.taskId, props.tasks, task);
             setTaskTitle(task.taskTitle);
             setTaskDescription(task.taskDescription);
         }

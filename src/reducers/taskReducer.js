@@ -20,7 +20,8 @@ const taskReducer = (state = initialState, action) => {
                 id: ++state.id
             };
         case DELETE_TASK:
-            tasks.splice(action.payload,1);
+            const taskIndexDelete = tasks.findIndex(task => task.taskId === action.payload);
+            tasks.splice(taskIndexDelete,1);
             return {
                 ...state,
                 tasks

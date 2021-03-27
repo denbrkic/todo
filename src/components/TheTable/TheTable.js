@@ -21,16 +21,15 @@ const TheTable = (props) => {
     const handleUpdateClose = () => setShowUpdateModal(false);
     const handleUpdateShow = () => setShowUpdateModal(true);
 
-    const [taskIndex, setTaskIndex] = useState();
     const [taskId, setTaskId] = useState();
 
     const deleteTask = () => {
-        props.deleteTask(taskIndex)
+        props.deleteTask(taskId)
         handleDeleteClose();
     }
 
-    const showDeleteTaskModal = (index) => {
-        setTaskIndex(index);
+    const showDeleteTaskModal = (id) => {
+        setTaskId(id);
         handleDeleteShow();
     }
 
@@ -59,7 +58,7 @@ const TheTable = (props) => {
                                 <td><Link to={`/task/${task.taskId}`}>{task.taskTitle}</Link></td>
                                 <td>{task.taskDateTime.toLocaleString()}</td>
                                 <td><Button variant="primary" onClick={() => showUpdateTaskModal(task.taskId)}>Edit</Button></td>
-                                <td><Button variant="primary" onClick={() => showDeleteTaskModal(index)}>Delete</Button></td>
+                                <td><Button variant="primary" onClick={() => showDeleteTaskModal(task.taskId)}>Delete</Button></td>
                             </tr>
                         )})}
                 </tbody>
