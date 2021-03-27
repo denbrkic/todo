@@ -3,7 +3,8 @@ import {
 } from '../actions/types';
 
 const initialState = {
-    tasks: []
+    tasks: [],
+    id: 1,
 };
 
 const taskReducer = (state = initialState, action) => {
@@ -12,6 +13,7 @@ const taskReducer = (state = initialState, action) => {
             return {
                 ...state,
                 tasks: [...state.tasks, action.payload],
+                id: ++state.id
             };
         default:
             return state;
