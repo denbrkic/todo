@@ -1,4 +1,5 @@
 import React from 'react';
+import './TaskDetails.scss';
 import { Link, withRouter } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -15,21 +16,22 @@ const TaskDetails = (props) => {
     }
 
     return (
-        <>
+        <div className="TaskDetails">
             <Container>
                 <Row>
                     <Col lg={4}>
-                        <Link to="/">Go to homepage</Link>
+                        <Link className="TaskDetails-link" to="/">Go to homepage</Link>
+                        
                         <TheDetails id={id} />
 
-                        <div>
+                        <div className="TaskDetails-buttons">
                             <EditTaskModal id={id}/>
                             <DeleteTaskModal id={id} redirectHome={redirectHome} />
                         </div>
                     </Col>
                 </Row>
             </Container>
-        </>
+        </div>
     )
 }
 

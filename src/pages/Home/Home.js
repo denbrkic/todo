@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-
+import './Home.scss';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-
 import TheForm from '../../components/TheForm/TheForm';
 import TheTable from '../../components/TheTable/TheTable';
 import TaskSearch from '../../components/TaskSearch/TaskSearch';
@@ -16,12 +15,13 @@ const Home = () => {
     const handleShow = () => setShowModal(true);
 
     return (
-        <>
+        <div className="Home">
             <Container>
                 <Row>
                     <Col lg={4}>
-                        <h1>ToDo</h1>
-                        <Button variant="primary" onClick={handleShow}>
+                        <h1 className="Home-title">Tasks</h1>
+
+                        <Button className="Home-add-task" variant="primary" onClick={handleShow}>
                             Add task
                         </Button>
 
@@ -43,7 +43,7 @@ const Home = () => {
                     </Col>
                 </Row>
             </Container>
-        </>
+        </div>
     )
 }
 
