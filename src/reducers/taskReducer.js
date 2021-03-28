@@ -2,21 +2,25 @@ import {
     ADD_TASK,
     DELETE_TASK,
     UPDATE_TASK,
+    SEARCH_TASKS,
 } from '../actions/types';
 
 const initialState = {
     tasks: [],
+    results: [],
     id: 1,
 };
 
 const taskReducer = (state = initialState, action) => {
     const tasks = [...state.tasks];
+    let results = [];
 
     switch(action.type) {
         case ADD_TASK:
             return {
                 ...state,
                 tasks: [...state.tasks, action.payload],
+                results: [...state.tasks, action.payload],
                 id: ++state.id
             };
         case DELETE_TASK:
@@ -24,7 +28,8 @@ const taskReducer = (state = initialState, action) => {
             tasks.splice(taskIndexDelete,1);
             return {
                 ...state,
-                tasks
+                tasks,
+                results: tasks
             };
         case UPDATE_TASK:
             const taskIndex = tasks.findIndex(task => task.taskId === action.payload.taskId);
@@ -32,8 +37,20 @@ const taskReducer = (state = initialState, action) => {
             tasks[taskIndex].taskDescription = action.payload.taskDescription;
             return {
                 ...state,
-                tasks
+                tasks,
+                results: tasks
             };
+        case SEARCH_TASKS:
+            if (action.payload) {
+                results = tasks.filter(task => task.taskId === parseInt(action.payload, 10) || task.taskTitle.includes(action.payload) || task.taskDescription.includes(action.payload))
+            } else {
+                results = tasks;
+            }
+
+            return {
+                ...state,
+                results
+            }
         default:
             return state;
     }

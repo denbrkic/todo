@@ -20,7 +20,7 @@ const TheTable = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.tasks.map((task, index) => {
+                    {props.results.map((task, index) => {
                         return (
                             <tr key={index}>
                                 <td>{task.taskId}</td>
@@ -37,7 +37,7 @@ const TheTable = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    tasks: state.task.tasks    
+    results: state.task.results   
 });
 
 const mapDispatchToProps = (dispatch) => ({});

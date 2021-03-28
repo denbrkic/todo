@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 import TheForm from '../../components/TheForm/TheForm';
 import TheTable from '../../components/TheTable/TheTable';
+import TaskSearch from '../../components/TaskSearch/TaskSearch';
 
 const Home = () => {
     const [showModal, setShowModal] = useState(false);
@@ -23,6 +24,8 @@ const Home = () => {
                         <Button variant="primary" onClick={handleShow}>
                             Add task
                         </Button>
+
+                        <TaskSearch />
 
                         <Modal show={showModal} onHide={handleClose}>
                             <Modal.Header closeButton>

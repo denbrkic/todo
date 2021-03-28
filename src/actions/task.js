@@ -1,6 +1,7 @@
 import { 
     ADD_TASK,
     DELETE_TASK,
+    SEARCH_TASKS,
     UPDATE_TASK,
 } from './types';
 
@@ -21,6 +22,13 @@ export const deleteTask = (payload) => dispatch => {
 export const updateTask = (payload) => dispatch => {
     dispatch({
         type: UPDATE_TASK,
+        payload
+    });
+}
+
+export const searchTasks = (payload) => dispatch => {
+    dispatch({
+        type: SEARCH_TASKS,
         payload
     });
 }
