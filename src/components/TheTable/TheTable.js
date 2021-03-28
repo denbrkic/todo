@@ -1,42 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import {
-    deleteTask,
-} from '../../actions/task';
-
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-
 import {Link} from 'react-router-dom';
-
-import TheForm from '../../components/TheForm/TheForm';
+import EditTaskModal from '../../components/EditTaskModal/EditTaskModal';
+import DeleteTaskModal from '../../components/DeleteTaskModal/DeleteTaskModal';
 
 const TheTable = (props) => {
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const handleDeleteClose = () => setShowDeleteModal(false);
-    const handleDeleteShow = () => setShowDeleteModal(true);
-
-    const [showUpdateModal, setShowUpdateModal] = useState(false);
-    const handleUpdateClose = () => setShowUpdateModal(false);
-    const handleUpdateShow = () => setShowUpdateModal(true);
-
-    const [taskId, setTaskId] = useState();
-
-    const deleteTask = () => {
-        props.deleteTask(taskId)
-        handleDeleteClose();
-    }
-
-    const showDeleteTaskModal = (id) => {
-        setTaskId(id);
-        handleDeleteShow();
-    }
-
-    const showUpdateTaskModal = (id) => {
-        setTaskId(id);
-        handleUpdateShow();
-    }
 
     return (
         <>
@@ -57,34 +26,12 @@ const TheTable = (props) => {
                                 <td>{task.taskId}</td>
                                 <td><Link to={`/task/${task.taskId}`}>{task.taskTitle}</Link></td>
                                 <td>{task.taskDateTime.toLocaleString()}</td>
-                                <td><Button variant="primary" onClick={() => showUpdateTaskModal(task.taskId)}>Edit</Button></td>
-                                <td><Button variant="primary" onClick={() => showDeleteTaskModal(task.taskId)}>Delete</Button></td>
+                                <td><EditTaskModal id={task.taskId} /></td>
+                                <td><DeleteTaskModal id={task.taskId} /></td>
                             </tr>
                         )})}
                 </tbody>
             </Table>
-            <Modal show={showDeleteModal} onHide={handleDeleteClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Delete the task</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Do you really want to delete the task?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleDeleteClose}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={deleteTask}>
-                        Delete
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-            <Modal show={showUpdateModal} onHide={handleUpdateClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit the task</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <TheForm closeModalCallback={handleUpdateClose} taskId={taskId} />
-                </Modal.Body>
-            </Modal>
         </>
     )
 }
@@ -93,8 +40,6 @@ const mapStateToProps = (state) => ({
     tasks: state.task.tasks    
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    deleteTask: (payload) => dispatch(deleteTask(payload)),
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TheTable);
