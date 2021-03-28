@@ -4,6 +4,7 @@ import {
     SEARCH_TASKS,
     UPDATE_TASK,
     SORT_TASKS,
+    PAGINATE_TASKS,
 } from './types';
 
 export const addTask = (payload) => dispatch => {
@@ -37,6 +38,13 @@ export const searchTasks = (payload) => dispatch => {
 export const sortTasks = (payload) => dispatch => {
     dispatch({
         type: SORT_TASKS,
+        payload
+    });
+}
+
+export const paginateTasks = (payload) => dispatch => {
+    dispatch({
+        type: PAGINATE_TASKS,
         payload
     });
 }

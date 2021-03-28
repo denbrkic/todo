@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import {
     deleteTask,
+    paginateTasks,
 } from '../../actions/task';
 
 const DeleteTaskModal = (props) => {
@@ -17,6 +18,7 @@ const DeleteTaskModal = (props) => {
         if (props.redirectHome) {
             props.redirectHome();
         }
+        props.paginateTasks(false);
     }
 
     const showDeleteTaskModal = () => {
@@ -48,6 +50,7 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
     deleteTask: (payload) => dispatch(deleteTask(payload)),
+    paginateTasks: (payload) => dispatch(paginateTasks(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteTaskModal);

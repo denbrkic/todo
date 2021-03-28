@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import EditTaskModal from '../../components/EditTaskModal/EditTaskModal';
 import DeleteTaskModal from '../../components/DeleteTaskModal/DeleteTaskModal';
 import TaskSort from '../../components/TaskSort/TaskSort';
+import TaskPagination from '../TaskPagination/TaskPagination';
 
 const TheTable = (props) => {
 
@@ -33,6 +34,7 @@ const TheTable = (props) => {
                         )})}
                 </tbody>
             </Table>
+            <TaskPagination />
         </>
     )
 }

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {
     addTask,
     updateTask,
+    paginateTasks,
 } from '../../actions/task';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
@@ -21,7 +22,9 @@ const TheForm = (props) => {
             const taskId = props.id;
             const taskDateTime = new Date();
             props.addTask({taskId, taskTitle, taskDescription, taskDateTime});
-        }        
+        }
+        
+        props.paginateTasks(false);
 
         if (props.closeModalCallback) {
             props.closeModalCallback();
@@ -65,6 +68,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     addTask: (payload) => dispatch(addTask(payload)),
     updateTask: (payload) => dispatch(updateTask(payload)),
+    paginateTasks: (payload) => dispatch(paginateTasks(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TheForm)
