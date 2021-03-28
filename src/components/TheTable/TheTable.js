@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import {Link} from 'react-router-dom';
 import EditTaskModal from '../../components/EditTaskModal/EditTaskModal';
 import DeleteTaskModal from '../../components/DeleteTaskModal/DeleteTaskModal';
+import TaskSort from '../../components/TaskSort/TaskSort';
 
 const TheTable = (props) => {
 
@@ -12,9 +13,9 @@ const TheTable = (props) => {
             <Table responsive>
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Creation Date</th>
+                        <th><TaskSort column={'taskId'}>ID</TaskSort></th>
+                        <th><TaskSort column={'taskTitle'}>Title</TaskSort></th>
+                        <th><TaskSort column={'taskDateTime'}>Creation Date</TaskSort></th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>

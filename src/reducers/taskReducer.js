@@ -3,6 +3,7 @@ import {
     DELETE_TASK,
     UPDATE_TASK,
     SEARCH_TASKS,
+    SORT_TASKS,
 } from '../actions/types';
 
 const initialState = {
@@ -51,6 +52,13 @@ const taskReducer = (state = initialState, action) => {
                 ...state,
                 results
             }
+            case SORT_TASKS:
+                results = tasks;
+                results.sort((a, b) => (a[action.payload] > b[action.payload]) ? 1 : -1)  
+                return {
+                    ...state,
+                    results,
+                }
         default:
             return state;
     }
