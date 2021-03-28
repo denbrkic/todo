@@ -6,6 +6,10 @@ With this application a user can add, remove and update tasks. It can also searc
 
 In the project directory, you can run:
 
+### `yarn install`
+
+Install all the dependencies, first.
+
 ### `yarn start`
 
 Spin up a development server.
