@@ -13,7 +13,7 @@ const initialState = {
     searchResults: [],
     id: 1,
     page: 1,
-    resultsPerPage: 2,
+    resultsPerPage: 5,
 };
 
 const taskReducer = (state = initialState, action) => {
@@ -67,7 +67,8 @@ const taskReducer = (state = initialState, action) => {
             return {
                 ...state,
                 results,
-                tasks
+                tasks,
+                searchResults: results
             }
         case PAGINATE_TASKS:
             if (!action.payload) {
