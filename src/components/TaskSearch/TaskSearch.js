@@ -14,24 +14,26 @@ const TaskSearch = (props) => {
         props.paginateTasks(1);
     }
 
-    return (
-        <>
-            <InputGroup className="mb-3">
-                <FormControl
-                    placeholder="Search for a task..."
-                    aria-label="Search"
-                    aria-describedby="basic-addon2"
-                    onChange={searchTasks}
-                />
+    const jsxSearch = props.results.length > 0 ? (
+        <InputGroup className="mb-3">
+            <FormControl
+                placeholder="Search for a task..."
+                aria-label="Search"
+                aria-describedby="basic-addon2"
+                onChange={searchTasks}
+            />
             <InputGroup.Append>
                 <InputGroup.Text id="basic-addon2">Search</InputGroup.Text>
-                </InputGroup.Append>
-            </InputGroup>
-        </>
-    )
+            </InputGroup.Append>
+        </InputGroup>
+    ) : null;
+
+    return jsxSearch;
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    results: state.task.results,
+});
 
 const mapDispatchToProps = (dispatch) => ({
     searchTasks: (payload) => dispatch(searchTasks(payload)),

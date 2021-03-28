@@ -9,8 +9,8 @@ import TaskPagination from '../TaskPagination/TaskPagination';
 
 const TheTable = (props) => {
 
-    return (
-        <>
+    const jsxTable = props.results.length > 0 ? (
+        <div>
             <Table responsive>
                 <thead>
                     <tr>
@@ -35,8 +35,10 @@ const TheTable = (props) => {
                 </tbody>
             </Table>
             <TaskPagination />
-        </>
-    )
+        </div>
+    ) : null;
+
+    return jsxTable;
 }
 
 const mapStateToProps = (state) => ({
